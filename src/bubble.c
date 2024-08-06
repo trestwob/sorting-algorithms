@@ -24,7 +24,7 @@ void bubble(int arr[], int n) {
 int main() {
     int arr[] = {40, 50, 50, 7, 4, 18, 89, 45};
     int n = sizeof(arr) / sizeof(arr[0]);
-    printf("%d\n", n);
+    printf("Size of array -> %d\n", n);
 
     printf("Unsorted array -> ");
     printArray(arr, n);
