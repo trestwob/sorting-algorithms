@@ -1,8 +1,8 @@
 # sorting-algorithms
 Collection of some sorting algorithms in C
 
-clone the repo, ```cd sorting-algorithms/src/ && make```
-run the executable ```./bin/bubble -s bubble -n 100 -m 100```
+clone the repo, ```cd sorting-algorithms && make```
+run the executable ```./bin/main -s bubble -n 100 -m 100```
 
 ### All arguments option
 ```
