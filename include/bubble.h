@@ -1,2 +1,2 @@
 #pragma once
-void bubble();
+void bubble(int n, int MAX_RANDOM);

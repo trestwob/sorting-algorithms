@@ -1,15 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include "../include/print.h"
+#include "../include/array.h"
 
-void bubble() {
+void bubble(int n, int MAX_RANDOM) {
     int i, j, k;
     int isSwapped;
+    int arr[n];
 
-    int arr[] = {40, 50, 50, 7, 4, 18, 89, 45};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    srand((unsigned int)time(NULL));
 
-    printf("Size of array -> %d\n", n);
+    array(arr, n, MAX_RANDOM); //n is the size of the array
+    //MAX_RANDOM is the range of number, suppose from 1 to 10, 10 is MAX_RANDOM
+
     printf("Unsorted array -> ");
     printArray(arr, n);
 
@@ -30,7 +34,8 @@ void bubble() {
     clock_t stop = clock();
     
     double timeTaken = ((double)(stop - start)) / CLOCKS_PER_SEC;
-    printf("Time taken %lf Seconds \nSorted array -> ", timeTaken);
+    printf("Sorted array -> ");
     printArray(arr, n);
+    printf("Time taken %lf Seconds \n", timeTaken);
 }
 
