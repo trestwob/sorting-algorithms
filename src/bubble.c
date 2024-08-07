@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include "print.h"
-#include <time.h>
-
 void bubble(int arr[], int n) {
     int i, j, k;
     int isSwapped;
@@ -18,27 +14,4 @@ void bubble(int arr[], int n) {
         }
         if (isSwapped == 0) break;
     }
-}
-
-
-int main() {
-    int arr[] = {40, 50, 50, 7, 4, 18, 89, 45};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    printf("Size of array -> %d\n", n);
-
-    printf("Unsorted array -> ");
-    printArray(arr, n);
-
-    clock_t start = clock();
-
-    bubble(arr, n);
-
-    clock_t stop = clock();
-    
-    double timeTaken = ((double)(stop - start)) / CLOCKS_PER_SEC;
-    printf("Time taken %lf Seconds \nSorted array -> ", timeTaken);
-    printArray(arr, n);
-
-    return 0;
-
 }
