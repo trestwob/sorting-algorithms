@@ -1,27 +1,31 @@
 #include <stdio.h>
-#include "include/print.h"
+#include <string.h>
+#include <unistd.h>
+#include <getopt.h>
+#include <stdlib.h>
 #include "include/bubble.h"
-#include <time.h>
 
+void usage(char **path) {
+    printf("Usage: %s [-s bubble]\n", *path);
+}
 
-int main() {
-    int arr[] = {40, 50, 50, 7, 4, 18, 89, 45};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    printf("Size of array -> %d\n", n);
+int main(int argc, char **argv) {
+    int ind;
+    int c;
+    while ((c = getopt (argc, argv, "s:")) != -1) {
+        switch (c) {
+            case 's':
+            if (strcmp(optarg, "bubble") == 0) bubble();
+            break;
+            default:
+            abort(); 
+        }
+    }
 
-    printf("Unsorted array -> ");
-    printArray(arr, n);
-
-    clock_t start = clock();
-
-    bubble(arr, n);
-
-    clock_t stop = clock();
-    
-    double timeTaken = ((double)(stop - start)) / CLOCKS_PER_SEC;
-    printf("Time taken %lf Seconds \nSorted array -> ", timeTaken);
-    printArray(arr, n);
+    for (ind = optind; ind < argc; ind++) {
+        printf("Invalid arguments provided. %s\n", argv[ind]);
+        usage(&argv[0]);
+    }
 
     return 0;
-
 }
