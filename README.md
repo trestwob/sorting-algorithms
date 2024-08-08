@@ -11,8 +11,9 @@ run the executable ```./bin/main -s bubble -n 100 -m 100```
 -m <max number> usage -> -m 100 || any value greater than 10 
 ```
 > [!WARNING]
-> When you declare values greater than 100 , the terminal might get messy because it prints out the unsorted array and sorted array for demonstration.
+> When you declare values greater than 100 for n, the terminal might get messy because of the array size it'll print.
 
-- [ ] A better command line argument
-- [ ] More sorting algorithms 
+- [x] A better command line argument
+- [x] Merge Sort
+- [ ] Quick Sort
 - [ ] Supress array printing through command line

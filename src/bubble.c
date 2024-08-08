@@ -14,8 +14,10 @@ void bubble(int n, int MAX_RANDOM) {
     array(arr, n, MAX_RANDOM); //n is the size of the array
     //MAX_RANDOM is the range of number, suppose from 1 to 10, 10 is MAX_RANDOM
 
-    printf("Unsorted array -> ");
-    printArray(arr, n);
+
+    printf("\n\n");
+    printf("Unsorted array -> "); // comment to suppress
+    printArray(arr, n); // comment t supress
 
     clock_t start = clock();
     
@@ -34,8 +36,11 @@ void bubble(int n, int MAX_RANDOM) {
     clock_t stop = clock();
     
     double timeTaken = ((double)(stop - start)) / CLOCKS_PER_SEC;
-    printf("Sorted array -> ");
-    printArray(arr, n);
-    printf("Time taken %lf Seconds \n", timeTaken);
+    
+    printf("Sorted array -> "); //comment this line to supress printing
+    printArray(arr, n); //comment this line to supress printing
+    
+    printf("Time taken in bubble sort %lf Seconds \n", timeTaken);
+    printf("\n\n");
 }
 

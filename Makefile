@@ -4,7 +4,7 @@ INC = include
 
 CFLAGS = -Iinclude -Wall -Wextra -pedantic -std=c17
 
-SRC= main.c $(SRC_DIR)/print.c $(SRC_DIR)/bubble.c $(SRC_DIR)/array.c
+SRC= main.c $(SRC_DIR)/print.c $(SRC_DIR)/bubble.c $(SRC_DIR)/array.c $(SRC_DIR)/merge.c
 
 OBJ= $(SRC:.c=.o)
 

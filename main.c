@@ -3,50 +3,103 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "include/bubble.h"
+#include "include/merge.h"
+
 
 void usage(char **path) {
-    printf("Usage: \n%s [-s <algorithm name>]\n[-n <size of array]\n[-m <max number>]\n -n and -m arguments should be greater than 10\nExample usage -> %s -s bubble -n 100 -m 100", *path, *path);
+    printf("Usage program [-s algorithm name] [-n array_size] [-m <max number>]\n");
+    printf("Options:\n");
+    printf("-s <algorithm name> -> bubble || merge\n");
+    printf("-n <number>         -> any number greater than 10\n");
+    printf("-m <number>         -> any  number greater than 10\n");
+    printf("Example usage -> %s -s bubble -n 20 -m 100\n", *path);
 }
-// make this command line argument better
-int main(int argc, char **argv) {
-    if (argc < 7 || argc > 7 ) {
-        usage(&argv[0]);
-        exit(1);
-    }
 
-    int ind;
-    int c;
+int validateAlgo(const char *str) {
+    char *algo[] = {"bubble", "merge"};
+    int arraySize = sizeof(algo) / sizeof(algo[0]);
+    for (int i = 0; i < arraySize; ++i) {
+        if (strcmp(str, algo[i]) == 0) return 1;
+    }
+    return 0;
+}
+
+int validateNumber(const char *str) {
+    while (*str) {
+        if (!isdigit(*str)) {
+            return 0;
+        }
+        str++;
+    }
+    return 1;
+}
+
+int main(int argc, char **argv) {
+    int opt;
+    int number = -1, MAX_RANDOM = -1;
     char *value = NULL;
-    int number = 100;
-    int maxVal = 100;
-    while ((c = getopt (argc, argv, "s:n:m:")) != -1) {
-        switch (c) {
+
+    struct option long_options[] = {
+        {"sort", required_argument, NULL, 's'},
+        {"number", required_argument, NULL, 'n'},
+        {"max", required_argument, NULL, 'm'},
+        {0,0,0,0} // indicates the end of arguments
+    };
+
+    while ((opt = getopt_long(argc, argv, "s:n:m:", long_options, NULL)) != -1) {
+        switch(opt) {
             case 's':
                 value = optarg;
-            break;
+                if (!validateAlgo(value)) {
+                    fprintf(stderr, "Error: Invalid sort algorithm. Must be 'bubble' or 'merge'.\n");
+                    usage(&argv[0]);
+                    exit(EXIT_FAILURE);
+                }
+                break;
             case 'n':
-            number = atoi(optarg);
-            break;
-            case 'm':
-            maxVal = atoi(optarg);
-            break;
+                if (validateNumber(optarg)) {
+                    number = atoi(optarg);
+                    if (number <= 10) {
+                        fprintf(stderr, "Error: -n value must be greater than 10.\n");
+                        usage(&argv[0]);
+                        exit(EXIT_FAILURE);
+                    }
+                } else {
+                    fprintf(stderr, "Error: -n must have a valid number.\n");
+                    usage(&argv[0]);
+                    exit(EXIT_FAILURE);
+                }
+                break;
+            case 'm': 
+                if (validateNumber(optarg)) {
+                    MAX_RANDOM = atoi(optarg);
+                    if (number <= 10) {
+                        fprintf(stderr, "Error: -m value must be greater than 10.\n");
+                        usage(&argv[0]);
+                        exit(EXIT_FAILURE);
+                    }
+                } else {
+                    fprintf(stderr, "Error: -n must have a valid number.\n");
+                    usage(&argv[0]);
+                    exit(EXIT_FAILURE);
+                }
+                break;
+            case '?':
+                usage(&argv[0]);
+                exit(EXIT_FAILURE);
             default:
-            abort(); 
+                usage(&argv[0]);
+                exit(EXIT_FAILURE);
         }
     }
 
-    if (strcmp(value, "bubble") == 0 && number > 10 && maxVal > 10) {
-        bubble(number, maxVal);
-    } else {
-        usage(&argv[0]);
-        exit(1);
-    }
-    
-    for (ind = optind; ind < argc; ind++) {
-        printf("Invalid arguments provided. %s\n", argv[ind]);
-        usage(&argv[0]);
+    if (value && number != -1 && MAX_RANDOM != -1) {
+        if (strcmp(value, "bubble") == 0) bubble(number, MAX_RANDOM);
+        if (strcmp(value, "merge") == 0) merge(number, MAX_RANDOM);
     }
 
     return 0;
+    
 }
