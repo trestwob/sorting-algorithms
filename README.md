@@ -6,10 +6,10 @@ run the executable ```./bin/main -s bubble -n 100 -m 100```
 
 ### All arguments option
 ```
-  Usage program [-s algorithm name] [-n array_size] [-m <max number>]                                                                                                                                           
-  Options:                                                                                                                                                                                                      
-  -s <algorithm name> -> bubble || merge || quick                                                                                                                                                               
-  -n <number>         -> any number greater than 10                                                                                                                                                             
+  Usage program [-s algorithm name] [-n array_size] [-m <max number>]
+  Options:
+  -s <algorithm name> -> bubble || merge || quick
+  -n <number>         -> any number greater than 10
   -m <number>         -> any  number greater than 10
 
 ```
