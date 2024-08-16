@@ -6,19 +6,19 @@
 #include <ctype.h>
 #include "include/bubble.h"
 #include "include/merge.h"
-
+#include "include/quick.h"
 
 void usage(char **path) {
     printf("Usage program [-s algorithm name] [-n array_size] [-m <max number>]\n");
     printf("Options:\n");
-    printf("-s <algorithm name> -> bubble || merge\n");
+    printf("-s <algorithm name> -> bubble || merge || quick\n");
     printf("-n <number>         -> any number greater than 10\n");
     printf("-m <number>         -> any  number greater than 10\n");
     printf("Example usage -> %s -s bubble -n 20 -m 100\n", *path);
 }
 
 int validateAlgo(const char *str) {
-    char *algo[] = {"bubble", "merge"};
+    char *algo[] = {"bubble", "merge", "quick"};
     int arraySize = sizeof(algo) / sizeof(algo[0]);
     for (int i = 0; i < arraySize; ++i) {
         if (strcmp(str, algo[i]) == 0) return 1;
@@ -98,6 +98,7 @@ int main(int argc, char **argv) {
     if (value && number != -1 && MAX_RANDOM != -1) {
         if (strcmp(value, "bubble") == 0) bubble(number, MAX_RANDOM);
         if (strcmp(value, "merge") == 0) merge(number, MAX_RANDOM);
+        if (strcmp(value, "quick") == 0) quick(number, MAX_RANDOM);
     }
 
     return 0;
